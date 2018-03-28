@@ -1,0 +1,44 @@
+\section{Atributi kvalitete softvera}
+
+\subsection{Fizička sigurnost sistema}
+\begin{itemize}
+    \item S obzirom da će se za instalaciju servera i baze podataka koristiti Amazonovi web servisi svu odgovornost vezanu za fizičku sigurnost servera i opreme snosi Amazon. Korištenje ovih servisa znatno olakšava fizičko održavanje sistema.
+\end{itemize}
+
+\subsection{Sigurnost sistema}
+\begin{itemize}
+    \item Sistem ne dozvoljava pristup onim dokumentima za koje korisnik nema ovlaštenost.
+    \item Sigurnost sistema će uvijek biti zagarantovana, bez obzira na testiranje, izmjene i dalji razvoj.
+    \item Sistem će implementirati zaštitu ulaznih podataka, validacijom istih i na strani klijenta i na strani servera kako bi se na taj način postigla slojevita zaštita.
+    \item Sistem će biti zaštićen od umetanja koda, odnosno od umetanja SQL komandi (SQL injection) i od Cross-site scripting napada, te od bilo kakvog zlonamjernog softvera.
+\end{itemize}
+
+\subsection{Backup sistema}
+\begin{itemize}
+    \item Sistem će, svake dvije sedmice, vršiti automatski backup na drugu lokaciju koja će, u slučaju bilo kakve štete ili napada, ostati netaknuta.
+    \item Pomenuti automatski backup će omogućiti povratak podataka u bazu podataka u slučaju gubitka istih.
+    \item U slučaju fatalnog kvara, sistem se, zahvaljujući automatskom backup-u, vraća na zadnje sačuvane postavke.
+\end{itemize}
+
+\subsection{Portabilnost sistema}
+\begin{itemize}
+    \item S obzirom da je zasnovan na JavaScript radnim okvirima (NodeJS i React.js) koji su vrlo prilagodljivi, sistem je moguće koristiti na svim operativnim sistemima, uz napomenu da se za mobilne uređaje nudi alternativa u vidu mobilne aplikacije.
+\end{itemize}
+
+\subsection{Skalabilnost sistema}
+\begin{itemize}
+    \item Prilikom izgradnje sistema staviti će se akcenat na dobar dizajn da bi se omogućila brza implementacija novih funkcionalnosti i nadogradnja postojeće infrastrukture.
+    \item Korištenjem amazonovih web servisa uklonjene su sve hardverske prepreke što se tiče skalabilnosti sistema. Broj korisnika koji istovremeno koriste sistem je neograničen.
+\end{itemize}
+
+\subsection{Dostupnost sistema}
+\begin{itemize}
+    \item Sistem će biti dostupan 24 sata dnevno svim danima u sedmici, sa izuzetkom nepredviđenog kvara ili tokom nadogradnje infrastruktura.
+\end{itemize}
+
+\subsection{Održavanje sistema}
+\begin{itemize}
+    \item Održavanje i zamjena komponenti sistema će biti najavljena svim korisnicima sistema.
+    \item U slučaju detekcije greške u softveru ili bilo kakve nekompatibilnosti sa novim operativnim okruženjima, ispravke grešaka i prilagodbe sistema će imati najveći prioritet i biti će obavljene što je brže moguće.
+\end{itemize}
+

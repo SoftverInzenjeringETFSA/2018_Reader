@@ -1,0 +1,38 @@
+\chapter{Konkretni zahtjevi}
+
+\section{Vanjski intefejsi}
+\subsection{Korisnički interfejsi}
+Svrha korisničkog interfejsa jeste da omogući korisnicima aplikacije interakciju sa njenim funkcionalnostima na jednostavan i intuitivan način. S obzirom da je aplikacija organizovana tako da ima samo jedan tip korisnika, korisnički interfejs je jedinstven za sve korisnike aplikacije. Korisnički interfejs treba korisniku prikazati pdf dokument koji će se čitati kao i sve potrebne alate za markiranje istog dokumenta, postavljene na jasno vidljivom mjestu kako bi sam proces markiranja bio praktičan. Pored toga što traka sa alatima za markiranje treba da bude na vidljivom mjestu, opcije za markiranje trebaju biti predstavljene na konzistentan način odgovarajućim ikonama iz font-awesome biblioteke. Ta prilagodba čini aplikaciju intiutivnijom i eliminira nedoumice oko odabira opcija. Također, korisnički interfejs treba korisniku omogućiti pregled svih njegovih dokumenata. Ukoliko korisnik ima više dokumenata, potrebno ih je prikazati na struktuiran način i pri tome primjenjivati paginaciju.
+Interfejs također treba da omogući upload i/ili import pdf datoteka na jednostavan način upotrebom HTML formi za unos podataka o datoteci i same datoteke.
+
+\subsection{Hardverski i komunikacijski interfejsi}
+Pristup aplikaciji je moguć sa svakog računara koji ima instaliran web browser i pristup internetu.\\
+Komunikacija je zasnovana na klijent-server arhitekturi, a sama aplikacija se sastoji od dvije komponente:
+\begin{enumerate}
+    \item Klijentska aplikacija napisana u React.js frameworku sa kojom korisnik vrši interakciju pomoću web browsera.
+    \item Serverska aplikacija napisana koristeći NodeJS i Express framework, koja uslužuje klijentsku aplikaciju i mobilne aplikacije
+\end{enumerate}
+Serverska aplikacija razmjenjuje sa klijentskom aplikacijom (ali i mobilnim aplikacijama) poruke koje su u JSON formatu, poštovajući HTTPS protokol.
+
+\subsection{Softverski interfejsi}
+Serverska aplikacija ima REST (\textbf{REpresentational State Transfer})  API koji je izložen na korištenje klijentskoj aplikaciji kao i mobilnim aplikacijama. Ovaj API raspolaže sa HTTP GET, POST, PUT i DELETE metodama pomoću kojih klijentska i  mobilne aplikacije komuniciraju sa serverskom. GET akcije se koriste za učitavanje liste pdf dokumenata ili otvaranje jednog pdf dokumenta za čitanje. POST  se koristi kada se uploaduje novi dokument, ali se koristi i kod markiranja i komentarisanja postojećih dokumenata (zajedno sa PUT akcijama). DELETE akcija se koristi za brisanje dokumenata, komentara, označenih dijelova dokumenta i slično. Pored klijentske i mobilnih aplikacija, serverska aplikacija komunicira sa bazom u kojoj se čuvaju  svi relevantni podaci i također komunicira sa Cloud-base storage aplikacijom gdje se pohranjuju pdf dokumenti. Klijentska aplikacija je SPA (single page application). 
+
+\section{Funkcionalni zahtjevi}
+
+\input{chapters/C2FunkcionalniZahtjevi}
+
+\section{Nefunkcionalni zahtjevi}
+\subsection{Upotrebljivost sistema}
+Dizajn i organizacija grafičkog interfejsa ovog sistema treba omogućiti korisnicima da efikasno obavljaju željene aktivnosti. Potrebno je omogućiti interfejs koji je intuitivan za korištenje. Ovi nefunkcionalni zahtjevi su posebno važni jer je skup korisnika naše aplikacije širok, te je namijenjen za korisnike različitog informatičkog znanja i starosne dobi. Zbog ovoga je bitno definisati slijedeće nefukcionalne zahtjeve:
+\begin{itemize}
+    \item Grafički interfejs će biti jednostavan i intuitivan sa odgovarajućim grafičkim kontrolama
+    \item Kontrole i poruke upozorenja će biti nedvosmislene i prikazane čitkim fontom 
+    \item Prilikom greške, korisnici će biti upozoreni odgovarajućom porukom
+\end{itemize}
+
+
+\subsection{Performanse sistema}
+Aplikacija je namijenjena većem broju korisnika koji pristupaju podacima kako preko web-aplikacije tako i putem mobilne aplikacije te je potrebno osigurati da server opslužuje veći broj korisnika istovremeno. Također, potrebno je omogućiti da server obradi sve zahtjeve dovoljno brzo tako da krajnji korisnici ne osjete značajno kašnjenje odziva sistema.
+
+
+\input{chapters/C1Atributi}

@@ -1,0 +1,77 @@
+
+\documentclass{scrreprt}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage{graphicx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage{tikz}
+\hypersetup{
+    bookmarks=false,   
+    pdftitle={Software Requirement Specification},    
+    pdfauthor={DevTech},                    
+    pdfsubject={TeX and LaTeX},                       
+    pdfkeywords={TeX, LaTeX, graphics, images},
+    colorlinks=true,       
+    linkcolor=orange,      
+    citecolor=black,      
+    filecolor=black,     
+    urlcolor=purple,      
+    linktoc=page            
+}%
+\date{}
+
+\setcounter{secnumdepth}{3}
+
+
+\begin{document}
+\begin{titlepage}
+\begin{flushright}
+    \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+    \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+    \begin{bfseries}
+        \Huge{SOFTWARE REQUIREMENTS\\ SPECIFICATION}\\
+            \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+    \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+        \vspace{1.9cm}
+        \vspace{1.9cm}
+        $<$Reader$>$\\
+        \vspace{3cm}
+        \vspace{1.9cm}
+        DevTech
+        \vspace{4cm}
+    \end{bfseries}
+\end{flushright}
+
+%\begin{flushleft}
+%\Large{\textbf{Tim}: Bajrambašić Hanad, Bajramović Maid, Bećić Ajla, Begić %Mirsad, Bojadžić Damir, Bojadžić Hanna, Brgulja Lejla }\\
+%\begin{tikz}
+%    \draw[orange] (0,0) -- (\textwidth,0);
+%\end{tikz}
+
+%\vspace{1cm}
+\begin{center}
+    \Large\textbf{Sarajevo, 28. mart, 2018.} 
+    \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+\end{center}
+
+%\end{flushleft}
+\end{titlepage}
+
+% sadrzaj
+\tableofcontents
+
+% historija promjena
+\include{historijapromjena}
+
+
+\include{chapters/Auvod}
+\include{chapters/Bopis}
+\include{chapters/Ckonkretnizahtjevi}
+% priloga bez :( \include{chapters/Dprilozi}
+
+
+
+\end{document}
