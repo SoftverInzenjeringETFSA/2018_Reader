@@ -1,0 +1,67 @@
+
+\documentclass{scrreprt}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage{graphicx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage{tikz}
+\usepackage[labelsep=period]{caption}
+\hypersetup{
+    bookmarks=false,   
+    pdftitle={Software Requirement Specification},    
+    pdfauthor={DevTech},                    
+    pdfsubject={TeX and LaTeX},                       
+    pdfkeywords={TeX, LaTeX, graphics, images},
+    colorlinks=true,       
+    linkcolor=orange,      
+    citecolor=black,      
+    filecolor=black,     
+    urlcolor=purple,      
+    linktoc=page            
+}%
+\date{}
+
+\setcounter{secnumdepth}{3}
+
+
+\begin{document}
+\begin{titlepage}
+\begin{flushright}
+    \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+    \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+    \begin{bfseries}
+        \Huge{DOKUMENT DIZAJNA SISTEMA}\\
+            \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+    \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+        \vspace{1.9cm}
+        \vspace{1.9cm}
+        $<$Reader$>$\\
+        \vspace{3cm}
+        \vspace{1.9cm}
+        DevTech
+        \vspace{4cm}
+    \end{bfseries}
+\end{flushright}
+
+\begin{center}
+    \Large\textbf{Sarajevo, 6. april, 2018.} 
+    \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+\end{center}
+
+%\end{flushleft}
+\end{titlepage}
+
+% sadrzaj
+\tableofcontents
+
+\input{chapters/1Uvod.tex}
+\input{chapters/2Interakcija.tex}
+\input{chapters/3Struktura.tex}
+\input{chapters/4Funkcionalnosti.tex}
+\input{chapters/5ERD.tex}
+
+
+\end{document}

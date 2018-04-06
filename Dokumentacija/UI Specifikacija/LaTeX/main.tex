@@ -1,0 +1,71 @@
+
+\documentclass{scrreprt}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage{graphicx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage{tikz}
+\usepackage[labelsep=period]{caption}
+\hypersetup{
+    bookmarks=false,   
+    pdftitle={Software Requirement Specification},    
+    pdfauthor={DevTech},                    
+    pdfsubject={TeX and LaTeX},                       
+    pdfkeywords={TeX, LaTeX, graphics, images},
+    colorlinks=true,       
+    linkcolor=orange,      
+    citecolor=black,      
+    filecolor=black,     
+    urlcolor=purple,      
+    linktoc=page            
+}%
+\date{}
+
+\setcounter{secnumdepth}{3}
+
+
+\begin{document}
+\begin{titlepage}
+\begin{flushright}
+    \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+    \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+    \begin{bfseries}
+        \Huge{USER INTERFACE SPECIFICATION}\\
+            \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+    \rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+        \vspace{1.9cm}
+        \vspace{0.7cm}
+        $<$Reader$>$\\
+        \vspace{3cm}
+        \vspace{0.7cm}
+        DevTech\\
+        \vspace{2cm}
+    \end{bfseries}
+\end{flushright}
+
+\begin{flushleft}
+  
+\end{flushleft}
+
+\begin{center}        
+    \Large{\textbf{Grafički dizajner: Čeligija Jasmina\\}}
+    \vspace{2.5cm}  
+    \Large\textbf{Sarajevo, 6. april, 2018.} 
+    \rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+\end{center}
+
+%\end{flushleft}
+\end{titlepage}
+
+% sadrzaj
+\tableofcontents
+
+\input{chapters/1uvod.tex}
+\input{chapters/2UI.tex}
+
+
+
+\end{document}
