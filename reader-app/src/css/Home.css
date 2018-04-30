@@ -88,21 +88,21 @@ body{
     color: #0355b3;
     cursor: pointer;
 }
-.files{
+.mainContent{
     grid-column: 2/8;
     grid-row: 2/11;
     display: grid;
-    grid-template-columns: repeat(10,1fr);
     grid-template-rows: repeat(6,100px);
     border: 1px solid black;
     background-color:rgba(0,0,0,0.6);
     box-shadow: inset 0 0 12px 0 #000;
     height: 100%;
+    padding: 2em;
 }
-.files img{
+.mainContent img{
     width: 80px;
 }
-.files figcaption {
+.mainContent figcaption {
     width: 100%;
     margin: 0;
     display: block;
