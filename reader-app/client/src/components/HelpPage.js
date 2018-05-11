@@ -50,7 +50,6 @@ class HelpPage extends Component {
                 </div>
                 <div className="mainContent" style={{ width: '100%'}}>
                 <div id="accordion">
-
                 {this.state.HelpItems.map((item,i) => 
                         <HelpItem key={i} id={i} item={item} />
                 )}

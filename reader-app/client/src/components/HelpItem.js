@@ -1,6 +1,7 @@
 import React, {Component } from 'react';
 import ReactDOM from 'react-dom';
 
+
 const axios = require('axios');
 
 class HelpItem extends Component {
@@ -18,21 +19,12 @@ class HelpItem extends Component {
             this.buttonStyle["backgroundColor"] = "#136d7a";
             this.buttonStyle["border"] = "#136d7a";
         }
+
+        this.state ={
+            renderPdf : null
+        }
     };
 
-
-    // proba servera
-    proba() {
-        axios.get('/proba', {
-
-        })
-        .then(response => {
-            alert(response.data.poruka);
-        })
-        .catch(error => {
-            alert(error.toString());
-        })
-    }
     
 
     render() {
@@ -40,7 +32,7 @@ class HelpItem extends Component {
             <div className="card" style={{ backgroundColor: 'transparent', border: '0em'}}>
                 <div className="card-header" style={{ backgroundColor: 'transparent', border: '0em'}}>
                 <h5 className="mb-0">
-                    <button className="btn btn-info" onClick={this.proba.bind(this)} style={this.buttonStyle} data-toggle="collapse" data-target={this.cardBodyId} aria-expanded="true" aria-controls={this.cardBody}>
+                    <button className="btn btn-info"style={this.buttonStyle} data-toggle="collapse" data-target={this.cardBodyId} aria-expanded="true" aria-controls={this.cardBody}>
                     {this.props.item.Question}
                     </button>
                 </h5>
@@ -48,7 +40,7 @@ class HelpItem extends Component {
 
                 <div id={this.cardBody} className="collapse" data-parent="#accordion">
                 <div className="card-body" style={{ backgroundColor: 'transparent', color: 'white', whiteSpace:' pre-line'}}>
-                    {this.props.item.Answer}   
+                      {this.props.item.Answer} />
                 </div>
                 </div>
             </div>

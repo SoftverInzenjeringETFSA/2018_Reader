@@ -113,3 +113,8 @@ body{
 .HelpPage {
     height: 100;
 }
+
+.greska {
+    color : red;
+    font-size: 20px;
+}
