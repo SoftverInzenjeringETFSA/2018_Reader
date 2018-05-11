@@ -10,6 +10,8 @@ class UploadOnline extends Component {
         this.state = {
             pdfFile : null,
             url : null, 
+            ime : '',
+            opis : '',
             error : null
         }
     }
@@ -17,13 +19,27 @@ class UploadOnline extends Component {
     updateUrl(event) {
         this.setState({
             url : event.target.value
-        })
+        });
+    }
+
+    updateIme(event) {
+        this.setState({
+            ime : event.target.value
+        });
+    }
+
+    updateOpis(event) {
+        this.setState({
+            opis : event.target.value
+        });
     }
     
     
     uploadOnline() {
         axios.post('/downloadOnline', {
-            'url' : this.state.url
+            'url' : this.state.url,
+            'ime' : this.state.ime,
+            'opis' : this.state.opis
         })
         .then(response => {
             if (response.data.success) {
@@ -60,8 +76,25 @@ class UploadOnline extends Component {
                 : <div>
                     <span style={{color : 'white'}}>Odabrali ste tu i tu opciju...</span><br/>
                     <div style={{marginTop : '20px'}}>
-                        <span style={{color : 'white', marginRight : '10px'}}>PDF URL:</span>
-                        <input type="text" style={{width : '90%'}} onChange={this.updateUrl.bind(this)}/><br/>
+                        <table style={{width : '90%'}}> 
+                            <tbody>
+                                <tr>
+                                    <td><span style={{color : 'white', marginRight : '10px'}}>PDF URL:</span></td>
+                                    <td><input type="text" style={{width : '90%'}} onChange={this.updateUrl.bind(this)}/><br/></td>
+                                </tr>
+                                <tr>
+                                    <td><span style={{color : 'white', marginRight : '10px'}}>Name:</span></td>
+                                    <td> <input type="text" style={{width : '90%'}} onChange={this.updateIme.bind(this)}/><br/></td>
+                                </tr>
+                                <tr>
+                                    <td><span style={{color : 'white', marginRight : '10px'}}>Description:</span></td>
+                                    <td> <input type="text" style={{width : '90%'}} onChange={this.updateOpis.bind(this)}/><br/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                       
+                        
+                       
                         <div style={{textAlign : 'center'}}>
                             <div className="file btn btn-lg btn-primary" style={{marginTop : '15px'}} onClick={this.uploadOnline.bind(this)}>
                                 Upload

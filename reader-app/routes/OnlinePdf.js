@@ -2,8 +2,13 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 var http = require('http');
-
 var download = require('download-pdf');
+
+const Sequelize = require('sequelize');
+const sequelize = require('../base/baza.js');
+const Op = Sequelize.Op;
+
+var PDFDokument = sequelize.import('../base/models/PDFDokument.js');
 
 router.post('/', function(req, res) {
     var pdf = req.body.url;
@@ -15,10 +20,20 @@ router.post('/', function(req, res) {
 
     download(pdf, options, function(err){
         if (err) throw err;
-        res.end(JSON.stringify({
-            'success' : 'yes',
-            'pdfName' : fileName
-        }));
+        PDFDokument.dodajDokument(req.body, './pdfs/' + fileName, function(success, data) {
+            if (success) {
+                res.end(JSON.stringify({
+                    'success' : 'yes',
+                    'pdfName' : fileName 
+                }));
+            }
+            else {
+                res.end(JSON.stringify({
+                    'success' : null,
+                    'message' : data
+                }));
+            }
+        });
     }); 
 });
 
