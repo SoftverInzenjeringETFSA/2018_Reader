@@ -1,49 +1,37 @@
-const Sequelize = require('sequelize');
-const db = require('../baza.js');
+const mongoose = require('../mongobase.js');
+const Schema = mongoose.Schema;
 
-//const Korisnik = db.import(__dirname + '/Korisnik.js');
+const Korisnik = require('./Korisnik.js');
 
-const PDFDokument = db.define('pdf_dokument', {
+
+const PDFDokumentSchema = new Schema( {
+    
+    
    ime : {
-       type : Sequelize.STRING
+       type : String//Sequelize.STRING
    },
 
    opis : {
-       type :Sequelize.STRING
+       type : String//Sequelize.STRING
    },
 
    direktorij : {
-       type : Sequelize.STRING
+       type : String//Sequelize.STRING
    },
 
    datum_uploada : {
-       type : Sequelize.DATE
+       type : Date//Sequelize.DATE
    },
 
    datum_posljednjeg_citanja : {
-       type : Sequelize.DATE
-   }
-});
+       type :Date// Sequelize.DATE
+   },
 
-PDFDokument.dodajDokument = function(dokument, direktorij, fn) {
-    PDFDokument.create({
-        ime : dokument.ime,
-        opis : dokument.opis,
-        direktorij : direktorij,
-        datum_uploada : new Date(),
-        datum_posljednjeg_citanja : new Date()
-    })
-    .then(noviDokument => {
-        if (noviDokument)
-            fn('yes', noviDokument);
-        else
-            fn(null, 'Greška.');
-    })
-    .catch(error => {
-        fn(null, error.message);
-    })
-}
+   korisnikId : [{
+       type : Schema.Types.ObjectId, ref: 'Korisnik'
+   }]
+}, );
 
-module.exports = function(db, DataTypes) {
-    return PDFDokument;
-}
+
+
+module.exports = mongoose.model('PDFDokument', PDFDokumentSchema);

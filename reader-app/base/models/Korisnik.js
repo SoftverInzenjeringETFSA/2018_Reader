@@ -1,26 +1,22 @@
-const Sequelize = require('sequelize');
-const db = require('../baza.js');
+const mongoose = require('../mongobase.js');
+const Schema = mongoose.Schema;
 
-
-
-const Korisnik = db.define('korisnici', {
+const KorisnikSchema = new Schema({
     email : {
-        type : Sequelize.STRING
+        type : String
     },
 
     lozinka : {
-        type : Sequelize.STRING
+        type : String
     },
 
     ime : {
-        type : Sequelize.STRING
+        type : String
     },
-
+ 
     prezime : {
-        type : Sequelize.STRING
+        type : String
     }
  });
  
- module.exports = function(db, DataTypes) {
-     return Korisnik;
- }
+ module.exports = mongoose.model('Korisnik', KorisnikSchema);

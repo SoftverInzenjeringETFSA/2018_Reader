@@ -8,11 +8,14 @@ const fs = require('fs');
 var OnlinePdf = require('./routes/OnlinePdf');
 var PdfToClient = require('./routes/PdfToClient');
 
-const Sequelize = require('sequelize');
-const sequelize = require('./base/baza.js');
-const Op = Sequelize.Op;
+//const Sequelize = require('sequelize');
+//const sequelize = require('./base/baza.js');
+//const mongo = require('./base/mongobase.js');
+//const PDFDokumentSchema = require('./base/models/PDFDokument.js');
 
-const { PDFDokument, Korisnik } = sequelize.import('./base/models/Models.js');
+//const Op = Sequelize.Op;
+
+//const { PDFDokument, Korisnik } = sequelize.import('./base/models/Models.js');
 
 
 app.use(bodyParser.json()); 

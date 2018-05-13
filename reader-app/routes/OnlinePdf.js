@@ -4,11 +4,8 @@ const fs = require('fs');
 var http = require('http');
 var download = require('download-pdf');
 
-const Sequelize = require('sequelize');
-const sequelize = require('../base/baza.js');
-const Op = Sequelize.Op;
-
-var PDFDokument = sequelize.import('../base/models/PDFDokument.js');
+//const KorisnikSchema = require('../base/models/Korisnik.js');
+var PDFDokumentSchema = require('../base/models/PDFDokument.js');
 
 router.post('/', function(req, res) {
     var pdf = req.body.url;
@@ -17,23 +14,29 @@ router.post('/', function(req, res) {
         directory : './pdfs',
         filename: fileName
     }
-
+    var dokument = req.body;
     download(pdf, options, function(err){
         if (err) throw err;
-        PDFDokument.dodajDokument(req.body, './pdfs/' + fileName, function(success, data) {
-            if (success) {
+        var _dokument = {
+            ime : dokument.ime,
+            opis : dokument.opis,
+            direktorij : './pdfs/' + fileName,
+            datum_uploada : new Date(),
+            datum_posljednjeg_citanja : new Date(),
+            //korisnikId : korisnik._id
+        }
+        PDFDokumentSchema.collection.insert(_dokument, {}, function(err, ress) {
+            if (!err) 
                 res.end(JSON.stringify({
                     'success' : 'yes',
                     'pdfName' : fileName 
                 }));
-            }
-            else {
-                res.end(JSON.stringify({
+            else    res.end(JSON.stringify({
                     'success' : null,
-                    'message' : data
+                    'message' : err
                 }));
-            }
         });
+      
     }); 
 });
 

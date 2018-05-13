@@ -7,6 +7,8 @@
     "bootstrap": "^4.1.0",
     "download-pdf": "^0.1.6",
     "jquery": "^3.3.1",
+    "mongoose": "^5.1.0",
+    "mongoose-auto-increment": "^5.0.1",
     "mysql2": "^1.5.3",
     "popper.js": "^1.14.3",
     "react": "^16.3.2",
