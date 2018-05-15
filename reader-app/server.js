@@ -7,6 +7,7 @@ const fs = require('fs');
 
 var OnlinePdf = require('./routes/OnlinePdf');
 var PdfToClient = require('./routes/PdfToClient');
+var savePDF = require('./routes/savePDF'); //dodana ruta za spremanje putem mobilne aplikacije
 
 //const Sequelize = require('sequelize');
 //const sequelize = require('./base/baza.js');
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/downloadOnline', OnlinePdf);
 app.use('/pdfToClient', PdfToClient);
+app.use('/savePDF',savePDF); // ruta za spremanje sa mobilne aplikacije
 
 
 app.get('/proba', function(req, res) {
