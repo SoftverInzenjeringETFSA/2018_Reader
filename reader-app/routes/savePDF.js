@@ -10,9 +10,7 @@ var dokument = require('../base/models/PDFDokument.js')
 
 router.post('/', function(req,res)
 {
-    //dodati funkciju za dodijeljivanje random naziva
     var direktoriji_novi_naziv = './pdfs/' + generisiIme();
-   
     
     var novi_dokument = new dokument({
             
