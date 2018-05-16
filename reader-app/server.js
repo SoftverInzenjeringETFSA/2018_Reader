@@ -7,16 +7,9 @@ const fs = require('fs');
 
 var OnlinePdf = require('./routes/OnlinePdf');
 var PdfToClient = require('./routes/PdfToClient');
+var Documents = require('./routes/Documents');
 var savePDF = require('./routes/savePDF'); //dodana ruta za spremanje putem mobilne aplikacije
 
-//const Sequelize = require('sequelize');
-//const sequelize = require('./base/baza.js');
-//const mongo = require('./base/mongobase.js');
-//const PDFDokumentSchema = require('./base/models/PDFDokument.js');
-
-//const Op = Sequelize.Op;
-
-//const { PDFDokument, Korisnik } = sequelize.import('./base/models/Models.js');
 
 
 app.use(bodyParser.json()); 
@@ -25,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/downloadOnline', OnlinePdf);
 app.use('/pdfToClient', PdfToClient);
 app.use('/savePDF',savePDF); // ruta za spremanje sa mobilne aplikacije
+app.use('/documents', Documents);
 
 
 app.get('/proba', function(req, res) {
