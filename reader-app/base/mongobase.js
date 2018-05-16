@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://127.0.0.1/reader');
+const config = require('./config').database;
+mongoose.connect('mongodb://' + config.user + ':' + config.password + '@ds261138.mlab.com:61138/reader');
 //mongoose.connect('mongodb://loacalhost/reader'); //dodao zbog testiranja
 
 module.exports = mongoose;

@@ -1,8 +1,8 @@
 {
     "database" : {
         "name" : "reader",
-        "user" : "root",
-        "password" : null,
+        "user" : "tim2",
+        "password" : "tim2SI",
         "dialect" : "mysql",
         "host" : "127.0.0.1"
     }

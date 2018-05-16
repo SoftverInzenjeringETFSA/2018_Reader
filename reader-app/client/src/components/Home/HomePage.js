@@ -16,22 +16,30 @@ class HomePage extends Component {
         super(props);
 
         this.state = {
-            dokumenti : [],
-            error : null
+
+            sesija : this.props.sesija,
+            id : this.props.id,
+            poruka : this.props.poruka
         }
+
+        this.logout = this.logout.bind(this);
+    }
+
+    logout() {
+        this.props.logout(this.state.sesija);
     }
 
     render() {
-        const uploadOnline = () => <UploadOnline />;
+        const uploadOnline = () => <UploadOnline id={this.state.id} sesija={this.state.sesija}/>;
         const helpPage = () => <HelpPage />;
-        const pregledDokumenata = () => <PregledDokumenata />;
+        const pregledDokumenata = () => <PregledDokumenata id={this.state.id} sesija={this.state.sesija}/>;
         
 
         return (
         <Router>
-            {this.state.error != null ? 
+            {this.state.poruka != null ? 
             <div>
-                <p className="greska">{this.state.error}</p>
+                <p className="greska">{this.state.poruka}</p>
             </div> :
             <div>
             <div className="content">
@@ -57,7 +65,7 @@ class HomePage extends Component {
                             <Link to='/helpPage' > 
                                 <i className="fas fa-hire-a-helper" style={{marginBottom: '90%'}} > <span style={{fontSize: '20px'}}> HelpPage </span></i>
                             </Link>
-                            <i className="fas fa-sign-out-alt" style={{marginBottom: '10%'}}> <span style={{fontSize: '20px'}}> Log out </span></i>
+                            <i className="fas fa-sign-out-alt" style={{marginBottom: '10%'}} onClick={this.logout}> <span style={{fontSize: '20px'}}> Log out </span></i>
                         </div>
                 </div>
                 <div className="mainContent">

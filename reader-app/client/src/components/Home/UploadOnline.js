@@ -12,7 +12,9 @@ class UploadOnline extends Component {
             url : null, 
             ime : '',
             opis : '',
-            error : null
+            error : null,
+            id : this.props.id, // kor
+            sesija : this.props.sesija //kor
         }
     }
 
@@ -39,14 +41,16 @@ class UploadOnline extends Component {
         axios.post('/downloadOnline', {
             'url' : this.state.url,
             'ime' : this.state.ime,
-            'opis' : this.state.opis
+            'opis' : this.state.opis,
+            'korisnikId' : this.state.id,
+            'sesija' : this.state.sesija
         })
         .then(response => {
             if (response.data.success) {
                 axios.get('/pdfToClient', {
                     responseType: 'blob',
                     params : {
-                        'pdfName' : response.data.pdfName
+                        'dir' : response.data.dir
                     }
                 })
                 .then(response => {
@@ -60,6 +64,8 @@ class UploadOnline extends Component {
                     this.setState({error : error.toString()});
                 });
             }
+            else 
+                this.setState({error : response.data.data});
         })
         .catch(error => {
             this.setState({error : error.toString()});

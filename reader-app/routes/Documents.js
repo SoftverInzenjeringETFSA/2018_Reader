@@ -7,16 +7,22 @@ var mongoose = require('mongoose');
 var PDFDokumentSchema = require('../base/models/PDFDokument.js');
 
 router.get('/', function(req, res) {
-    PDFDokumentSchema.collection.find({
-        korisnikId : mongoose.Types.ObjectId(req.query.id)
-    }).toArray(function(err, result) {
-        if (err) res.end(JSON.stringify({'success' : null, 'data' : err}));
-        res.end(JSON.stringify({'success' : 'yes', 'data' : result}));
-    });
+    if (req.session.korisnik == req.query.sesija) {
+        
+        var doc = PDFDokumentSchema.collection.find({
+            korisnikId : req.query.id
+        });
+        if (doc)
+            doc.toArray(function(err, result) {
+            if (err) res.end(JSON.stringify({'success' : null, 'data' : err}));
+            res.end(JSON.stringify({'success' : 'yes', 'data' : result}));
+        });
+    }
+    else   
+        res.end(JSON.stringify({
+            'success' : null,
+            'data' : 'Access denied.'
+        }));
 });
-
-
-
-
 
 module.exports = router; 

@@ -8,36 +8,46 @@ var download = require('download-pdf');
 var PDFDokumentSchema = require('../base/models/PDFDokument.js');
 
 router.post('/', function(req, res) {
-    var pdf = req.body.url;
-    var fileName = generisiIme();
-    var options = {
-        directory : './pdfs',
-        filename: fileName
-    }
-    var dokument = req.body;
-    download(pdf, options, function(err){
-        if (err) throw err;
-        var _dokument = {
-            ime : dokument.ime,
-            opis : dokument.opis,
-            direktorij : './pdfs/' + fileName,
-            datum_uploada : new Date(),
-            datum_posljednjeg_citanja : new Date(),
-            //korisnikId : korisnik._id
+    console.log(req.session.korisnik+'\n' + req.body.sesija);
+    if (req.session.korisnik = req.body.sesija) {
+        var pdf = req.body.url;
+        var fileName = generisiIme();
+        var options = {
+            directory : './pdfs',
+            filename: fileName
         }
-        PDFDokumentSchema.collection.insert(_dokument, {}, function(err, ress) {
-            if (!err) 
-                res.end(JSON.stringify({
-                    'success' : 'yes',
-                    'pdfName' : fileName 
-                }));
-            else    res.end(JSON.stringify({
-                    'success' : null,
-                    'message' : err
-                }));
-        });
-      
-    }); 
+        var dokument = req.body;
+        download(pdf, options, function(err){
+            if (err) throw err;
+            var _dokument = {
+                ime : dokument.ime,
+                opis : dokument.opis,
+                direktorij : './pdfs/' + fileName,
+                datum_uploada : new Date(),
+                datum_posljednjeg_citanja : new Date(),
+                korisnikId : dokument.korisnikId // id korisnika
+                //korisnikId : korisnik._id
+            }
+            PDFDokumentSchema.collection.insert(_dokument, {}, function(err, ress) {
+                if (!err) 
+                    res.end(JSON.stringify({
+                        'success' : 'yes',
+                        'pdfName' : fileName,
+                        'dir' : _dokument.direktorij 
+                    }));
+                else    res.end(JSON.stringify({
+                        'success' : null,
+                        'message' : err
+                    }));
+            });
+        
+        }); 
+    }
+    else 
+        res.end(JSON.stringify({
+            'success' :null,
+            'data' : 'Access denied.'
+        }))
 });
 
 generisiIme = function() {

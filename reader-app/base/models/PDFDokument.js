@@ -1,9 +1,6 @@
 const mongoose = require('../mongobase.js');
 const Schema = mongoose.Schema;
 
-const Korisnik = require('./Korisnik.js');
-
-
 const PDFDokumentSchema = new Schema( {
     
     

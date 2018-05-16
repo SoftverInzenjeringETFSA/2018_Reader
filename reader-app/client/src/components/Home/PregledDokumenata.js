@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 import logo from '../../images/doc.png';
+
+import { 
+    BrowserRouter as Router, 
+    Route, 
+    Redirect,
+    Link
+} from 'react-router-dom';
+
+import PdfViewer from './PdfViewer.js';
+
 const axios = require('axios');
 
 
@@ -9,7 +19,10 @@ class PregledDokumenata extends Component {
 
         this.state = {
             dokumenti : [],
-            error : null
+            error : null,
+            pdfFile : null,
+            id : this.props.id,
+            sesija : this.props.sesija
         }
 
         this.loadDocuments = this.loadDocuments.bind(this);
@@ -22,7 +35,8 @@ class PregledDokumenata extends Component {
     loadDocuments() {
         axios.get('/documents', {
             params : {
-                'id' : '5af85cc6bdb9e2014833b1fa' // id korisnika 
+                'id' : this.state.id, // id korisnika 
+                'sesija' : this.state.sesija
             }
         })
         .then(response => {
@@ -30,41 +44,68 @@ class PregledDokumenata extends Component {
                 this.setState({dokumenti : response.data.data});
             }
             else 
-                this.setState({error : response.data.dara});
+                this.setState({error : response.data.data});
         })
         .catch(error => {
             this.setState({error : error.toString()});
         })
     }
 
+    prikaziPdf(dir) {
+        axios.get('/pdfToClient', {
+            responseType: 'blob',
+            params : {
+                'dir' : dir
+            }
+        })
+        .then(response => {
+            const file = new Blob(
+            [response.data], 
+            {type: 'application/pdf'});
+        const fileUrl = URL.createObjectURL(file);
+        this.setState({pdfFile : fileUrl});
+        })
+        .catch(error => {
+            this.setState({error : error.toString()});
+        });
+    }
+
     render() {
         return(
-            <div>
-                {this.state.error != null ? 
+            <Router>
                 <div>
-                    <p className="greska">{this.state.error}</p>
-                </div> : 
-                <div>
-                    {this.state.dokumenti.length > 0 ? 
-                    <div id="accordion">
-                        {this.state.dokumenti.map((item,i) => 
-                            <div style={{width : '5%'}}>
-                                <figure>
-                                    <img src={logo} alt="No file"></img>
-                                    <figcaption>{item.ime}</figcaption>
-                                </figure>
-                            </div>
-                            
-                        )}
-                    </div> : 
-                <div>
+                    {this.state.error != null ? 
                     <div>
-                        <p className="obavjestenje">No files.</p>
+                        <p className="greska">{this.state.error}</p>
+                    </div> : 
+                    <div>
+                        {this.state.dokumenti.length > 0 ? 
+                        <div>
+                            <table><tbody><tr>
+                                {this.state.dokumenti.map((item,i) => 
+                                    <td >
+                                        <figure>
+                                            <img src={logo} alt="No file" onClick={() => this.prikaziPdf(item.direktorij)}></img>
+                                            <figcaption>{item.ime}</figcaption>
+                                        </figure>
+                                    </td>
+                                    
+                                )}
+                            </tr></tbody></table>
+                            <div style={{height: '100vh', overflowY: 'scroll', marginTop : '10px'}}>
+                                <PdfViewer pdfFile={this.state.pdfFile}/>
+                            </div>
+                        </div>
+                        : 
+                    <div>
+                        <div>
+                            <p className="obavjestenje">No files.</p>
+                        </div>
+                    </div>}
                     </div>
-                </div>}
+                    }
                 </div>
-                }
-            </div>
+            </Router>
         )
     }
 }

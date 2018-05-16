@@ -1,0 +1,106 @@
+body{
+    background-image:  url("../images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: gray;
+    font-family: 'Black Ops One', cursive;
+    font-variant: small-caps;
+    font-style: normal;
+    text-align: center;
+    margin:0;
+}
+header{
+    margin: 0;
+    padding: 0;
+    grid-column: 1/4;
+    font-size: 80px;
+    text-align: center;
+    color: white;
+    background-color:rgba(0,0,0,0.85);
+    border-radius: 3px;
+    border: 1px solid black;
+    border-bottom: 2px solid black;
+    box-shadow: inset 0 0 12px 0 #000;
+}
+header::first-letter {
+    color: #0642cc;
+}
+#content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(8,70px);
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+.login, .div_greska{
+    grid-column: 2/3;
+    grid-row: 3/8;
+    background-color:rgba(0,0,0,0.7);
+    border:3px solid black;
+    box-shadow: inset 0 0 80px 0 #000;
+    border-radius: 5px;
+}
+
+.div_greska {
+    grid-row: 2/8;
+}
+
+.login input{
+    height: 10%;
+    width: 90%;
+    font-size: 20px;
+    margin-bottom: 15px;
+    background-color:rgba(0,0,0,0.1);
+    border-radius: 3px;
+    border: 1px solid black;
+    border-bottom: 3px solid black;
+    box-shadow: inset 0 0 12px 0 #000;
+    color: white;
+}
+.login input::placeholder{
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 20px;
+    padding-left: 2%;
+    padding-top: 2%;
+    font-family: "Times New Roman", Times, serif;
+}
+.login h2{
+    height: 10%;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 10%;
+    padding-bottom: 10px;
+    text-align: center;
+    color: white;
+    font-size: 35px;
+    border-bottom: 2px solid black;
+    box-shadow: inset 0 0 12px 0 #000;
+}
+#login{
+    width: 50%;
+    height: 14%;
+    margin-top: 4%;
+    font-size: 30px;
+    background-color: #072cbd;
+    border: 2px solid #010152;
+    box-shadow: inset 0 0 17px 0 #010c69;
+    cursor: pointer;
+    outline:none;
+    font-family: 'Black Ops One', cursive;
+    font-variant: small-caps;
+}
+#login:hover{
+    background-color: #0214b3;
+}
+.login p{
+    margin: 0;
+    color: white;
+    font-family: "Times New Roman", Times, serif;
+    cursor: pointer;
+}
+.login p:hover{
+    color: #0642cc;
+}
