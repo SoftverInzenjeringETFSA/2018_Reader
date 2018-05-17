@@ -25,10 +25,16 @@ class PregledDokumenata extends Component {
             id : this.props.id,
             sesija : this.props.sesija
         }
-
+        this.bar = React.createRef();
         this.loadDocuments = this.loadDocuments.bind(this);
     }
-
+    scrollNumber = 0;
+    
+    scrollChanged(event){  
+        this.scrollNumber = (event.target.scrollTop / (event.target.scrollHeight -  event.target.clientHeight) )*100;
+        this.bar.current.setAttribute("aria-valuenow", Math.ceil(this.scrollNumber));
+        this.bar.current.style.width= Math.ceil(this.scrollNumber)+'%';
+     }
     componentWillMount() {
         this.loadDocuments();
     }
@@ -115,7 +121,11 @@ class PregledDokumenata extends Component {
 
                                 )}
                             </tr></tbody></table>
-                            <div style={{height: '100vh', overflowY: 'scroll', marginTop : '10px'}}>
+                            <button className="btn btn-primary">Spasi progres čitanja</button>
+                            <div className="progress" style={{height: '20px'}}>
+                                <div ref={this.bar} className="progress-bar" role="progressbar" style={{width: '0%'}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div style={{height: '100vh', overflowY: 'scroll', marginTop : '10px'}} onScroll={this.scrollChanged.bind(this)}>
                                 <PdfViewer pdfFile={this.state.pdfFile}/>
                             </div>
                         </div>
