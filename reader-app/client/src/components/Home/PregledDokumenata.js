@@ -29,8 +29,8 @@ class PregledDokumenata extends Component {
         this.loadDocuments = this.loadDocuments.bind(this);
     }
     scrollNumber = 0;
-    
-    scrollChanged(event){  
+
+    scrollChanged(event){
         this.scrollNumber = (event.target.scrollTop / (event.target.scrollHeight -  event.target.clientHeight) )*100;
         this.bar.current.setAttribute("aria-valuenow", Math.ceil(this.scrollNumber));
         this.bar.current.style.width= Math.ceil(this.scrollNumber)+'%';
@@ -86,9 +86,9 @@ class PregledDokumenata extends Component {
           rezultatiPretrage = this.state.svidokumenti;
         }
         else {
-          for(var i=0; i<this.state.dokumenti.length; i++){
-            if(this.state.dokumenti[i].ime.includes(search)){
-              rezultatiPretrage.push(this.state.dokumenti[i]);
+          for(var i=0; i<this.state.svidokumenti.length; i++){
+            if(this.state.svidokumenti[i].ime.includes(search)){
+              rezultatiPretrage.push(this.state.svidokumenti[i]);
             }
           }
         }
