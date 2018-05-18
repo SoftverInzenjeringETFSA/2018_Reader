@@ -13,7 +13,10 @@ var OnlinePdf = require('./routes/OnlinePdf'),
     Login = require('./routes/Login'),
     Logout = require('./routes/Logout');
     ListPDF = require('./routes/ListPDF');
-
+var saveHighlight = require('./routes/saveHighlight');
+var currentDir = require('./routes/currentDir');
+var returnHighlights = require('./routes/returnHighlights');
+var numberH = require('./routes/numberH');
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,6 +33,10 @@ app.use('/documents', Documents);
 app.use('/login', Login);
 app.use('/logout', Logout);
 app.use('/listPDF', ListPDF);
+app.use('/saveHighlight', saveHighlight);
+app.use('/currentDir', currentDir);
+app.use('/returnHighlights', returnHighlights);
+app.use('/numberH', numberH);
 
 
 app.get('/proba', function(req, res) {
