@@ -1,9 +1,9 @@
 const express = require('express');
-const app = express(); 
+const app = express();
 const routes = express.Router();
 
-const bodyParser = require('body-parser'); 
-const fs = require('fs'); 
+const bodyParser = require('body-parser');
+const fs = require('fs');
 const session = require('express-session');
 
 var OnlinePdf = require('./routes/OnlinePdf'),
@@ -17,8 +17,9 @@ var saveHighlight = require('./routes/saveHighlight');
 var currentDir = require('./routes/currentDir');
 var returnHighlights = require('./routes/returnHighlights');
 var numberH = require('./routes/numberH');
+var archiveText = require('./routes/archiveText');
 
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: 'Mk9292iksk9e9e9edj1jkdikL',
@@ -37,6 +38,7 @@ app.use('/saveHighlight', saveHighlight);
 app.use('/currentDir', currentDir);
 app.use('/returnHighlights', returnHighlights);
 app.use('/numberH', numberH);
+app.use('/archiveText', archiveText);
 
 
 app.get('/proba', function(req, res) {

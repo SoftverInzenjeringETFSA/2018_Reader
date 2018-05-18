@@ -14,8 +14,14 @@ const axios = require('axios');
 var jeste = 1;
 var jeste2= 1;
 var broj = 0;
-
-
+var sel;
+var range;
+var listacvorovastranice;
+var listaKoordinata = [];
+var listaInnerHtml = [];
+var listaTagName = [];
+var listaData = [];
+var citat;
 //Pomocne funkcije
 
 //Vraca top i left koordinatu
@@ -231,18 +237,61 @@ class HomePage extends Component {
         }
 
         this.logout = this.logout.bind(this);
+        this.saveHiglight = this.saveHiglight.bind(this);
+          this.returnHighlights = this.returnHighlights.bind(this);
+            this.archiveText = this.archiveText.bind(this);
+
     }
 
     logout() {
         this.props.logout(this.state.sesija);
     }
 
+    setText() {
+     sel = window.getSelection();
+     citat = sel.toString();
+
+   }
+
+    setRang() {
+     sel = window.getSelection();
+     citat = sel.toString();
+     range =  window.getSelection().getRangeAt(0);
+      listacvorovastranice =  sel.getRangeAt(0).startContainer.parentNode.parentNode.childNodes;
+      var startNode = range.startContainer.parentNode;
+      var endNode = range.endContainer.parentNode;
+      listaKoordinata = [];
+      listaTagName = [];
+      listaInnerHtml = [];
+      listaData = [];
+
+
+
+      listacvorovastranice.forEach(function(item){
+          if ( sel.containsNode(item, true) && item !== startNode && item !== endNode ) {
+
+              var top_temp = getOffset( item).top;
+              var left_temp = getOffset( item ).left;
+              listaKoordinata.push([left_temp, top_temp]);
+              listaInnerHtml.push(item.innerHTML);
+              listaTagName.push(item.tagName);
+              listaData.push(item.data);
+              //item.style.backgroundColor="rgba(255,255,51,0.4)";
+
+
+
+
+          }
+      });
+
+
+    }
+
 
 
     saveHiglight(){
-                    if(jeste){
-            var sel = window.getSelection();
-            var range =  window.getSelection().getRangeAt(0);
+                  //  if(jeste){
+
             //console.log(range);
             var saveNode = range.startContainer;
             var startOffset_save = range.startOffset;  // where the range starts
@@ -257,18 +306,15 @@ class HomePage extends Component {
 
 
           var stranica =  sel.getRangeAt(0).startContainer.parentNode.parentNode;
-          var listacvorovastranice =  sel.getRangeAt(0).startContainer.parentNode.parentNode.childNodes;
-
+          //var listacvorovastranice =  sel.getRangeAt(0).startContainer.parentNode.parentNode.childNodes;
           var startNode = range.startContainer.parentNode;
           var endNode = range.endContainer.parentNode;
+
           var top1 = getOffset( startNode ).top;
           var left1 = getOffset( startNode ).left;
           var top2 = getOffset( endNode ).top;
           var left2 = getOffset( endNode ).left;
-          var listaKoordinata = [];
-          var listaInnerHtml = [];
-          var listaTagName = [];
-          var listaData = [];
+
 
 
 
@@ -320,8 +366,28 @@ class HomePage extends Component {
 
               //higlight unutrasnje cvorove
               NodeList.prototype.forEach = Array.prototype.forEach;
-              listacvorovastranice.forEach(function(item){
-                  if ( sel.containsNode(item, true) && item !== startNode && item !== endNode ) {
+              listaKoordinata.forEach(function(item, index) {
+                //post request za insert u bazu
+                axios.post('/saveHighlight', {
+                  'top' : item[0],
+                  'left' : item[1],
+                  'innerHtml' : listaInnerHtml[index],
+                  'data' : listaData[index],
+                  'tagName' : listaTagName[index],
+                  'isStart' : 0,
+                  'isEnd' : 0,
+                  'idH' : id
+                }).then(response => {}).catch(error => {
+                    console.log(error.toString());
+                    this.setState({error : error.toString()});
+                });
+
+
+              });
+              highlightList(listaKoordinata,listaTagName,listaInnerHtml);
+            //  listacvorovastranice.forEach(function(item){
+                  //if ( sel.containsNode(item, true) && item !== startNode && item !== endNode ) {
+                  /*if(range.isPointInRange(item,0) && item !== startNode && item !== endNode) {
                       var top_temp = getOffset( item).top;
                       var left_temp = getOffset( item ).left;
                       listaKoordinata.push([left_temp, top_temp]);
@@ -329,6 +395,8 @@ class HomePage extends Component {
                       listaTagName.push(item.tagName);
                       listaData.push(item.data);
                       item.style.backgroundColor="rgba(255,255,51,0.4)";
+
+
 
                       //post request za insert u bazu
                       axios.post('/saveHighlight', {
@@ -347,8 +415,8 @@ class HomePage extends Component {
 
 
 
-                  }
-              });
+                  }*/
+            //  });
 
             // Highlight vanjske cvorove
               var safeRanges = getSafeRanges(range);
@@ -372,11 +440,11 @@ class HomePage extends Component {
 
         //  startNode = range.startContainer;
           //endNode = range.endContainer;
-          jeste = 0;
+          //jeste = 0;
 
       //  broj = broj +1;
 
-          }
+        //  }
     }
 
     returnHighlights() {
@@ -412,24 +480,30 @@ console.log('BROOOOOJ');
             var jsonStart = nizNode.find(start);
             console.log(jsonStart);
             var jsonEnd = nizNode.find(end);
-            var listaKoordinata = [];
-            var listaTagName = [];
-            var listaInnerHtml = [];
+            var listaKoordinata2 = [];
+            var listaTagName2 = [];
+            var listaInnerHtml2 = [];
+
 
             for(var j = 0; j<nizNode.length; j++) {
-              listaKoordinata.push([nizNode[j].coordinateLeft, nizNode[j].coordinateTop]);
-              listaTagName.push(nizNode[j].tagName);
-              listaInnerHtml.push(nizNode[j].innerHtml);
+              listaKoordinata2.push([nizNode[j].coordinateLeft, nizNode[j].coordinateTop]);
+              listaTagName2.push(nizNode[j].tagName);
+              listaInnerHtml2.push(nizNode[j].innerHtml);
             }
-
+  console.log('WIIIIIIIIIIII');
+  try{
            var rang = buildRange(jsonStart.coordinateLeft,jsonStart.coordinateTop, jsonEnd.coordinateLeft, jsonEnd.coordinateTop, startOffset,endOffset,jsonStart.data,jsonStart.innerHtml,jsonStart.tagName,jsonEnd.data,jsonEnd.innerHtml,jsonEnd.tagName);
 
 var safeRanges = getSafeRanges(rang);
 for (var f = 0; f < safeRanges.length; f++) {
     highlightRange(safeRanges[f]);
 }
-console.log('WIIIIIIIIIIII');
-highlightList(listaKoordinata, listaTagName, listaInnerHtml);
+}
+catch(err) {
+  console.log('PROBLEM SA RANGOM');
+}
+
+highlightList(listaKoordinata2, listaTagName2, listaInnerHtml2);
 
           }
 
@@ -445,10 +519,18 @@ console.log('12341');
           this.setState({error : error.toString()});
       });
 
+    }
 
 
 
-
+    archiveText() {
+      axios.post('/archiveText',{
+        'citat' : citat,
+        'id': this.state.id
+      }).then(response => {}).catch(error => {
+          console.log(error.toString());
+          //this.setState({error : error.toString()});
+      });
     }
 
 
@@ -479,10 +561,10 @@ console.log('12341');
                                 <i className="fas fa-upload" style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Upload file </span></i>
                             </Link>
 
-                            <i className="fas fa-archive" style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Archive text </span> </i>
+                            <i className="fas fa-archive" onMouseOver = {this.setText} onClick = {this.archiveText} style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Archive text </span> </i>
                             <i className="fas fa-quote-right" style={{marginBottom: '15%'}}><span style={{fontSize: '20px', marginLeft : '5px'}}> Favourite quote </span></i>
                             <i className="fas fa-comment" onClick= {this.returnHighlights} style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Import highlights </span> </i>
-                            <i className="fas fa-pencil-alt" onMouseOver = {this.saveHiglight} style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Highlight text </span></i>
+                            <i className="fas fa-pencil-alt" onMouseOver = {this.setRang} onClick = {this.saveHiglight} style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Highlight text </span></i>
                             <i className="fas fa-mobile-alt" style={{marginBottom: '15%'}}><span style={{fontSize: '20px', marginLeft : '20px'}}> Redirect </span></i>
                             <Link to='/helpPage' >
                                 <i className="fas fa-hire-a-helper" style={{marginBottom: '90%'}} > <span style={{fontSize: '20px'}}> HelpPage </span></i>

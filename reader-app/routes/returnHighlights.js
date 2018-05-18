@@ -67,7 +67,7 @@ router.get('/', function(req,res) {
 
                 }
                 itemsProcessed = itemsProcessed + 1;
-                if(itemsProcessed === broj -1) {
+                if(itemsProcessed === broj) {
                   funkcija();
                 }
               });

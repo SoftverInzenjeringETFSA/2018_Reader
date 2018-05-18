@@ -34,6 +34,10 @@ var item = req.body;
       });
   }
   NodeSchema.collection.insert(_node,  {}, function(err, ress){
+    res.end(JSON.stringify({
+        'success' : 'no',
+        'data' : 'The e-mail adress and password you have entered are incorrect'
+    }));
 
   });
 
