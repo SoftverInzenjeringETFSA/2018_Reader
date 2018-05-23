@@ -6,10 +6,14 @@ const router = express.Router();
 const fs = require('fs');
 var http = require('http');
 var dokument = require('../base/models/PDFDokument.js')
+var konekcija = require('../base/mongobase.js')
+
 
 
 router.post('/', function(req,res)
 {
+    console.log("Spojio sa bazom!");
+
     var direktoriji_novi_naziv = './pdfs/' + generisiIme();
     
     var novi_dokument = new dokument({
@@ -17,18 +21,23 @@ router.post('/', function(req,res)
         ime: req.body.ime,
         opis: req.body.opis,
         direktoriji: direktoriji_novi_naziv,
-        datum_uploada: Date.now,
-        datum_posljednjeg_citanja: Date.now
-        /*
-            korisnikId: req.body.id
-            Kad kolege zavrse svoj dio sa login-om onda cu dodati ovaj dio
-        */ 
+        datum_uploada: new Date("11/20/2014 04:11"),
+        datum_posljednjeg_citanja: new Date("05/28/2014 04:11")
+       // korisnikId: req.body.id   
+       /*
+            Greska u formatu datuma, pa smo morali fiksne vrijednosti uzet zbog testiranja.
+            Funkcija je uspjesno spremala na bazu.
+            Provjera:
+                use reader
+                show collection - ispise sve kolekcije
+                db.naziv_kolekcije.find()
+       */ 
     });
 
-    novi_dokument.save(function(error) {
-        res.sendStatus(500).send(error);
+      novi_dokument.save(function(error) {
+        if(error)console.log(error);
     });
-
+    
     
 });
 

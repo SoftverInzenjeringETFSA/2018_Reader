@@ -41,3 +41,4 @@ app.get('/proba', function (req, res) {
 
 
 app.listen(5000);
+console.log("Uspjesno pokrenuta stranica na portu 5000");
