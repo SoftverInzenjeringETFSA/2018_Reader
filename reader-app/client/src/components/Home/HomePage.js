@@ -528,8 +528,9 @@ console.log('12341');
       axios.post('/archiveText',{
         'citat' : citat,
         'id': this.state.id
-      }).then(response => {}).catch(error => {
+      }).then(response => {alert("Text uspješno spašen!")}).catch(error => {
           console.log(error.toString());
+          alert("Došlo je do greške!")}
           //this.setState({error : error.toString()});
       });
     }
