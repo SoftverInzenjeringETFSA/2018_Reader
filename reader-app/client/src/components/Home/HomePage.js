@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import '../../css/Home.css';
-import UploadOnline from './UploadOnline.js';
+import UploadFile from './UploadFile.js';
 import HelpPage from '../HelpPage.js';
 import PregledDokumenata from './PregledDokumenata.js';
 
@@ -30,7 +30,7 @@ class HomePage extends Component {
     }
 
     render() {
-        const uploadOnline = () => <UploadOnline id={this.state.id} sesija={this.state.sesija}/>;
+        const uploadFile = () => <UploadFile id={this.state.id} sesija={this.state.sesija}/>;
         const helpPage = () => <HelpPage />;
         const pregledDokumenata = () => <PregledDokumenata id={this.state.id} sesija={this.state.sesija}/>;
 
@@ -51,9 +51,10 @@ class HomePage extends Component {
                         <Link to='/pregledDokumenata'>
                                 <i className="fas fa-file" style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Your files </span></i>
                             </Link>
-                            <Link to='/uploadOnline'>
+                            <Link to='/uploadFile'>
                                 <i className="fas fa-upload" style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Upload file </span></i>
                             </Link>
+
 
                             <i className="fas fa-archive" style={{marginBottom: '15%'}}> <span style={{fontSize: '20px'}}> Archive text </span> </i>
                             <i className="fas fa-quote-right" style={{marginBottom: '15%'}}><span style={{fontSize: '20px', marginLeft : '5px'}}> Favourite quote </span></i>
@@ -69,7 +70,7 @@ class HomePage extends Component {
                 <div className="mainContent">
                     <Redirect from='/' to='/pregledDokumenata' />
                     <Route exact path="/pregledDokumenata" component={pregledDokumenata}/>
-                    <Route exact path='/uploadOnline' component={uploadOnline}></Route>
+                    <Route exact path='/uploadFile' component={uploadFile}></Route>
                     <Route exact path='/helpPage' component={helpPage}></Route>
                 </div>
             </div>

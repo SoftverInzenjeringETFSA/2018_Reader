@@ -9,7 +9,7 @@ var PDFDokumentSchema = require('../base/models/PDFDokument.js');
 
 router.post('/', function(req, res) {
     console.log(req.session.korisnik+'\n' + req.body.sesija);
-    if (req.session.korisnik = req.body.sesija) {
+    if (req.session.korisnik == req.body.sesija) {
         var pdf = req.body.url;
         var fileName = generisiIme();
         var options = {

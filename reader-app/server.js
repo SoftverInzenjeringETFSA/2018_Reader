@@ -7,6 +7,7 @@ const fs = require('fs');
 const session = require('express-session');
 
 var OnlinePdf = require('./routes/OnlinePdf'),
+    UploadLocal = require('./routes/UploadLocal.js'),
     PdfToClient = require('./routes/PdfToClient'),
     Documents = require('./routes/Documents'),
     savePDF = require('./routes/savePDF'), //dodana ruta za spremanje putem mobilne aplikacije
@@ -32,6 +33,7 @@ app.use('/login', Login);
 app.use('/logout', Logout);
 app.use('/listPDF', ListPDF);
 app.use('/savePdfToMobile', savePdfToMobile);
+app.use('/uploadLocal', UploadLocal);
 
 
 app.get('/proba', function (req, res) {
