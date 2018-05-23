@@ -530,7 +530,7 @@ console.log('12341');
         'id': this.state.id
       }).then(response => {alert("Text uspješno spašen!")}).catch(error => {
           console.log(error.toString());
-          alert("Došlo je do greške!")}
+          alert("Došlo je do greške!");
           //this.setState({error : error.toString()});
       });
     }
