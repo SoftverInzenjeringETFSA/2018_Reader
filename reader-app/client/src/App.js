@@ -81,16 +81,19 @@ class App extends Component {
     const loginPage = () => <Login poruka={this.state.poruka} login={this.loginKorisnika}/>
     const homePage = () => <HomePage id={this.state.id} sesija={this.state.sesija} poruka={this.state.poruka} logout={this.logoutKorisnika} />;
     var redirect = this.state.id.length > 0 ? '/homePage' : '/';
-    alert(redirect);
+
     return (
       <Router>
         <div className="App"> 
       <Route exact path="/" render={() => (
-        
-          <Redirect to={redirect}/>
-      )}/>
+      <Redirect to={redirect}/>
+        )
+      }/>
+            {this.state.id.length == 0 ? <Redirect from="/homePage"to="/"/> :null}
             <Route exact path="/" component={loginPage}/>
-            <Route path="/homePage" component={homePage}/>
+            <Route  path="/homePage" component={homePage}/>
+            
+            }
       </div>
       </Router>
     );
