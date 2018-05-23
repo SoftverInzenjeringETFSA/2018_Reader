@@ -41,17 +41,18 @@ class App extends Component {
         if (response.data.success) {
           if (response.data.success == 'yes')
               this.setState({
-                'id' : response.data.data,
-                'sesija' : response.data.session
+                id : response.data.data,
+                sesija : response.data.session,
+                poruka : null
               });
           else  
-              this.setState({'poruka' : response.data.data});
+              this.setState({poruka : response.data.data});
         }
         else
-          this.setState({'poruka' : response.data.data})
+          this.setState({poruka : response.data.data})
     })
     .catch(error => {
-      this.setState({'poruka' : error.toString()});
+      this.setState({poruka : error.toString()});
     });
   }
 
@@ -63,33 +64,36 @@ class App extends Component {
     })
     .then(response => {
       if (response.data.success) {
-        this.setState({'id' : ''})
+        this.setState({id : '', poruka : null})
       }
       else {
-        this.setState({'poruka' : response.data.data});
+        this.setState({poruka : response.data.data});
       }
     })
     .catch(error => {
-      this.setState({'poruka' : error.toString()});
+      this.setState({poruka : error.toString()});
     })
 
   }
 
 
   render() {
-
     const loginPage = () => <Login poruka={this.state.poruka} login={this.loginKorisnika}/>
     const homePage = () => <HomePage id={this.state.id} sesija={this.state.sesija} poruka={this.state.poruka} logout={this.logoutKorisnika} />;
     var redirect = this.state.id.length > 0 ? '/homePage' : '/';
+
     return (
       <Router>
         <div className="App"> 
       <Route exact path="/" render={() => (
-        
-          <Redirect to={redirect}/>
-      )}/>
+      <Redirect to={redirect}/>
+        )
+      }/>
+            {this.state.id.length == 0 ? <Redirect from="/homePage"to="/"/> :null}
             <Route exact path="/" component={loginPage}/>
-            <Route path="/homePage" component={homePage}/>
+            <Route  path="/homePage" component={homePage}/>
+            
+            }
       </div>
       </Router>
     );
