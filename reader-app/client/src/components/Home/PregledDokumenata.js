@@ -110,23 +110,25 @@ class PregledDokumenata extends Component {
                         </div>
                         {this.state.dokumenti.length > 0 ?
                         <div>
-                            <table><tbody><tr>
+                            <div>
                                 {this.state.dokumenti.map((item,i) =>
-                                    <td >
+                                    <div style={{display : 'inline', float : 'left'}} >
                                         <figure>
                                             <img src={logo} alt="No file" onClick={() => this.prikaziPdf(item.direktorij)}></img>
                                             <figcaption>{item.ime}</figcaption>
                                         </figure>
-                                    </td>
+                                    </div>
 
                                 )}
-                            </tr></tbody></table>
+                            </div>
+                            <div style={{clear : 'both'}}>
                             <button className="btn btn-primary">Spasi progres čitanja</button>
                             <div className="progress" style={{height: '20px'}}>
                                 <div ref={this.bar} className="progress-bar" role="progressbar" style={{width: '0%'}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <div style={{height: '100vh', overflowY: 'scroll', marginTop : '10px'}} onScroll={this.scrollChanged.bind(this)}>
                                 <PdfViewer pdfFile={this.state.pdfFile}/>
+                            </div>
                             </div>
                         </div>
                         :

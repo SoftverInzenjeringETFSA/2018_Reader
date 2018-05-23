@@ -22,7 +22,7 @@ router.post('/', upload.single('file'), function(req, res) {
             korisnikId : dokument.korisnikId
         };
 
-        PDFDokumentSchema.collection.insert(dokument, {}, function(err, ress) {
+        PDFDokumentSchema.collection.insert(_dokument, {}, function(err, ress) {
             if (!err) 
                 res.end(JSON.stringify({
                     'success' : 'yes',
