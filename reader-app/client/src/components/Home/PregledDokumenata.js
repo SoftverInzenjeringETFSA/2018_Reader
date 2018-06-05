@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../../images/doc.png';
+import folder from '../../images/folder.png';
 
 import {
     BrowserRouter as Router,
@@ -20,13 +21,16 @@ class PregledDokumenata extends Component {
         this.state = {
             dokumenti : [],
             svidokumenti : [],
+            folderi: [],
             error : null,
             pdfFile : null,
             id : this.props.id,
-            sesija : this.props.sesija
+            sesija : this.props.sesija,
+            foldeer: false
         }
         this.bar = React.createRef();
         this.loadDocuments = this.loadDocuments.bind(this);
+        this.klikNaFolder = this.klikNaFolder.bind(this);
     }
     scrollNumber = 0;
 
@@ -50,6 +54,7 @@ class PregledDokumenata extends Component {
             if (response.data.success) {
                 this.setState({dokumenti : response.data.data});
                 this.setState({svidokumenti : response.data.data});
+                this.setState({floderi: [{name:"Fakultet"}, {name:"Privatno"}, {name:"Zabava"}]});
             }
             else
                 this.setState({error : response.data.data});
@@ -57,6 +62,12 @@ class PregledDokumenata extends Component {
         .catch(error => {
             this.setState({error : error.toString()});
         })
+    }
+
+    klikNaFolder(){
+        this.setState({
+            foldeer:true
+        });
     }
 
     prikaziPdf(dir) {
@@ -110,17 +121,35 @@ class PregledDokumenata extends Component {
                         </div>
                         {this.state.dokumenti.length > 0 ?
                         <div>
-                            <div>
-                                {this.state.dokumenti.map((item,i) =>
+                           
+
+                              <div className="row">
+                               
                                     <div style={{display : 'inline', float : 'left'}} >
                                         <figure>
-                                            <img src={logo} alt="No file" onClick={() => this.prikaziPdf(item.direktorij)}></img>
-                                            <figcaption>{item.ime}</figcaption>
+                                        <img src={folder} alt="No folder" onClick={this.klikNaFolder} ></img>
+                                            <figcaption>{"Fakultet"}</figcaption>
                                         </figure>
                                     </div>
 
-                                )}
+                                
                             </div>
+                            {this.state.foldeer && 
+                            <div className="row">
+                            {this.state.dokumenti.map((item,i) =>
+                                
+                                <div style={{display : 'inline', float : 'left'}} >
+                                    <figure>
+                                  
+                                        <img src={logo} alt="No file" onClick={() => this.prikaziPdf(item.direktorij)}></img>
+                                        <figcaption>{item.ime}</figcaption>
+                                    </figure>
+                                </div>
+
+                            )}
+                        </div>
+                            }
+                            
                             <div style={{clear : 'both'}}>
                             <button className="btn btn-primary">Spasi progres čitanja</button>
                             <div className="progress" style={{height: '20px'}}>

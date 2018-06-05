@@ -12,6 +12,7 @@ class UploadFile extends Component {
             url : null, 
             ime : '',
             opis : '',
+            folder: '',
             error : null,
             id : this.props.id, // kor
             sesija : this.props.sesija, //kor
@@ -38,6 +39,11 @@ class UploadFile extends Component {
     updateOpis(event) {
         this.setState({
             opis : event.target.value
+        });
+    }
+    updateFolder(event) {
+        this.setState({
+            folder : event.target.value
         });
     }
     
@@ -164,6 +170,10 @@ class UploadFile extends Component {
                                     <td><span style={{color : 'white', marginRight : '10px'}}>Description:</span></td>
                                     <td> <input type="text" style={{width : '90%'}} onChange={this.updateOpis.bind(this)}/><br/></td>
                                 </tr>
+                                <tr>
+                                            <td><span style={{color : 'white', marginRight : '10px'}}>Folder Name:</span></td>
+                                            <td> <input type="text" style={{width : '90%'}} onChange={this.updateFolder.bind(this)}/><br/></td>
+                                </tr>
                             </tbody>
                         </table>
                        
@@ -189,6 +199,10 @@ class UploadFile extends Component {
                                         <tr>
                                             <td><span style={{color : 'white', marginRight : '10px'}}>Description:</span></td>
                                             <td> <input type="text" style={{width : '90%'}} onChange={this.updateOpis.bind(this)}/><br/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span style={{color : 'white', marginRight : '10px'}}>Folder Name:</span></td>
+                                            <td> <input type="text" style={{width : '90%'}} onChange={this.updateFolder.bind(this)} /><br/></td>
                                         </tr>
                                     </tbody>
                                 </table>
