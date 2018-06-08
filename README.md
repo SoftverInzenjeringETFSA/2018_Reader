@@ -8,3 +8,6 @@ Potrebno je otvoriti konzolu u folderu ../reader-app/ i ukucati komandu: "yarn d
 
 korisničko ime: MaidBajramovic
 Lozinka: 123456
+
+Deploy:
+https://reader-si.herokuapp.com/
